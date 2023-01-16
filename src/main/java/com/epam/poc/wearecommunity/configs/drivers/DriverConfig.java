@@ -1,0 +1,45 @@
+package com.epam.poc.wearecommunity.configs.drivers;
+
+import com.epam.poc.wearecommunity.configs.browsers.BrowserName;
+import com.epam.poc.wearecommunity.configs.browsers.ChromeBrowser;
+import com.epam.poc.wearecommunity.configs.browsers.FirefoxBrowser;
+import com.epam.poc.wearecommunity.core.GlobalConstants;
+import com.epam.poc.wearecommunity.utilities.PropertyReader;
+import org.openqa.selenium.WebDriver;
+
+import java.util.concurrent.TimeUnit;
+
+public class DriverConfig {
+
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    private DriverConfig() {
+    }
+
+    public static WebDriver getDriver(String browserName) {
+        BrowserName browserNameEnum = BrowserName.valueOf(browserName.toUpperCase());
+
+        switch (browserNameEnum) {
+            case CHROME:
+                driver.set(new ChromeBrowser().getDriver());
+                break;
+            case FIREFOX:
+                driver.set(new FirefoxBrowser().getDriver());
+                break;
+            default:
+                throw new IllegalArgumentException("Please check the browser name again!");
+        }
+
+        driver.get().manage().window().maximize();
+
+        PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
+        driver.get().manage().timeouts().implicitlyWait(Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)), TimeUnit.SECONDS);
+
+        return driver.get();
+    }
+
+    public static void quiteDriver() {
+        driver.get().quit();
+        driver.remove();
+    }
+}

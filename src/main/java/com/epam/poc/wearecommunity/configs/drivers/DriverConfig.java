@@ -38,7 +38,7 @@ public class DriverConfig {
         return driver.get();
     }
 
-    public static void quiteDriver() {
+    public static void quitDriver() {
         driver.get().quit();
         driver.remove();
     }

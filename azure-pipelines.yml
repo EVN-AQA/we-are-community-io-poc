@@ -4,19 +4,41 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: ubuntu-latest
 
+schedules:
+  - cron: "0 17 * * *"
+    displayName: Daily midnight build
+    branches:
+      include:
+        - master
+    always: true
+
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+  - task: Maven@3
+    displayName: Build, test, and deploy with Apache Maven
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '11'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'package'
+
+  - task: NodeTool@0
+    displayName: 'Install Node 12.x'
+    inputs:
+      versionSpec: 12.x
+
+  - task: PublishCucumberReport@1
+    displayName: 'Publish Cucumber Report'
+    inputs:
+      jsonDir: 'cucumberReport/json'
+      outputPath: 'cucumberReport/cucumber-report-html'
+      name: 'Smoke Tests'
+      title: UI Testing

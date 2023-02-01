@@ -25,13 +25,13 @@ public class CommunitiesPageObject extends BasePage {
 
     public boolean isCommunityDisplayed(String communityTitle) {
         // TODO: need to remove staticWait and add waitForElementVisible function instead
-        staticWait(2);
+        waitForElementUntilInvisible(driver, CommunitiesPageUI.EVENT_GLOBAL_LOADER);
 
         boolean isCommunityDisplayed = true;
         List<WebElement> communities = getElements(driver, CommunitiesPageUI.SEARCH_RESULT_BY);
         if (communities.size() > 0) {
             for (WebElement element : communities) {
-                if (!communityTitle.contains(element.findElement(CommunitiesPageUI.TEXT_SEARCH_RESULT_BY).getText())) {
+                if (!element.findElement(CommunitiesPageUI.TEXT_SEARCH_RESULT_BY).getText().contains(communityTitle)) {
                     isCommunityDisplayed = false;
                     break;
                 }
@@ -41,6 +41,13 @@ public class CommunitiesPageObject extends BasePage {
     }
 
     public void openPageByCommunityTitle(String communityTitle) {
-        clickToElement(driver, CommunitiesPageUI.TEXT_SEARCH_RESULT_BY);
+        List<WebElement> communities = getElements(driver, CommunitiesPageUI.SEARCH_RESULT_BY);
+        if (communities.size() > 0) {
+            for (WebElement element : communities) {
+                if (element.findElement(CommunitiesPageUI.TEXT_SEARCH_RESULT_BY).getText().equalsIgnoreCase(communityTitle)) {
+                    element.click();
+                }
+            }
+        }
     }
 }

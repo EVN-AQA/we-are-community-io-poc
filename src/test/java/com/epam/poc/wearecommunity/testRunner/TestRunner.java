@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         tags = "@Smoke",
         plugin = {
                 "pretty",
-                "html:target/cucumberReport/cucumber-report.html",
+                "html:target/cucumberReport/cucumber-report-html/cucumber-report.html",
                 "json:target/cucumberReport/json/cucumber-report.json"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )

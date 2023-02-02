@@ -37,8 +37,6 @@ steps:
         ls -a 
         echo '-----Fix 2-----'
         ls target
-        echo '-----Fix 3-----'
-        ls cucumberReport
 
   - task: NodeTool@0
     displayName: 'Install Node 12.x'

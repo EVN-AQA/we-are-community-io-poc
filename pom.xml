@@ -124,7 +124,7 @@
                         </goals>
                         <configuration>
                             <projectName>PoC Project - wearecommunity.io website</projectName>
-                            <outputDirectory>${project.build.directory}/cucumberReport/cucumber-report-html</outputDirectory>
+                            <outputDirectory>${project.build.directory}/cucumberReport/cucumber-report-html/</outputDirectory>
                             <inputDirectory>${project.build.directory}/cucumberReport/json/</inputDirectory>
                             <jsonFiles>
                                 <param>**/*.json</param>

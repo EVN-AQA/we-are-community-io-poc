@@ -18,6 +18,11 @@ schedules:
     always: true
 
 steps:
+  - task: NodeTool@0
+    displayName: 'Install Node 12.x'
+    inputs:
+      versionSpec: 12.x
+
   - task: Maven@3
     displayName: Build, test, and deploy with Apache Maven
     inputs:
@@ -28,17 +33,20 @@ steps:
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'package'
-
-  - task: NodeTool@0
-    displayName: 'Install Node 12.x'
-    inputs:
-      versionSpec: 12.x
+      goals: 'verify'
+      options: '-DisHeadless="true"'
 
   - task: PublishCucumberReport@1
     displayName: 'Publish Cucumber Report'
     inputs:
-      jsonDir: 'cucumberReport/json'
-      outputPath: 'cucumberReport/cucumber-report-html'
-      name: 'Smoke Tests'
+      jsonDir: 'target/cucumberReport/json'
+      outputPath: 'target/cucumberReport/cucumber-report-html'
+      name: 'Smoke_Test'
       title: UI Testing
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Cucumber Report Extension Artifact
+    inputs:
+      PathtoPublish: '/home/vsts/work/1/s/target/cucumberReport/cucumber-report-html/cucumber-html-reports/'
+      ArtifactName: 'Cucumber-Report-Extension'
+      publishLocation: 'Container'

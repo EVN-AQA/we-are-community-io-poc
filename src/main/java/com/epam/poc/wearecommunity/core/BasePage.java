@@ -152,19 +152,10 @@ public class BasePage {
         }
     }
 
-    public void waitForElementUntilInvisible(WebDriver driver, WebElement element) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
-            wait.until(ExpectedConditions.invisibilityOf(element));
-        } catch (Exception e) {
-            logger.info("Element is visibility");
-        }
-    }
-
     public void waitForElementUntilInvisible(WebDriver driver, By by) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
-            wait.until(ExpectedConditions.invisibilityOf(getElement(driver, by)));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
         } catch (Exception e) {
             logger.info("Element is visibility");
         }
@@ -174,15 +165,6 @@ public class BasePage {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        } catch (Exception e) {
-            logger.info("Element is invisibility");
-        }
-    }
-
-    public void waitForElementUntilVisible(WebDriver driver, WebElement element) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
-            wait.until(ExpectedConditions.visibilityOf(element));
         } catch (Exception e) {
             logger.info("Element is invisibility");
         }

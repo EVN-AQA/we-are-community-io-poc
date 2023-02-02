@@ -31,14 +31,6 @@ steps:
       goals: 'package'
       options: '-DisHeadless="true"'
 
-  - task: CmdLine@2
-    inputs:
-      script: |
-        echo '-----Fix 1-----'
-        ls -a 
-        echo '-----Fix 2-----'
-        ls target
-
   - task: NodeTool@0
     displayName: 'Install Node 12.x'
     inputs:
@@ -51,3 +43,10 @@ steps:
       outputPath: 'target/cucumberReport/cucumber-report-html'
       name: 'Smoke_Test'
       title: UI Testing
+
+  - task: PublishBuildArtifacts@1
+    displayName: Export Cucumber report
+    inputs:
+      PathtoPublish: '/home/vsts/work/1/s/target/cucumberReport/cucumber-report-html/cucumber-html-reports/'
+      ArtifactName: 'Cucumber-Report'
+      publishLocation: 'Container'

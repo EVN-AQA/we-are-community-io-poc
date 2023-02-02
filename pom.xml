@@ -105,7 +105,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>com.epam.poc.wearecommunity.testRunner.TestRunner.java</include>
+                        <include>com/epam/poc/wearecommunity/testRunner/TestRunner.java</include>
                     </includes>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>

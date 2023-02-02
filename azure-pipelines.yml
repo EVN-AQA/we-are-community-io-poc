@@ -18,6 +18,11 @@ schedules:
     always: true
 
 steps:
+  - task: NodeTool@0
+    displayName: 'Install Node 12.x'
+    inputs:
+      versionSpec: 12.x
+
   - task: Maven@3
     displayName: Build, test, and deploy with Apache Maven
     inputs:
@@ -31,11 +36,6 @@ steps:
       goals: 'verify'
       options: '-DisHeadless="true"'
 
-  - task: NodeTool@0
-    displayName: 'Install Node 12.x'
-    inputs:
-      versionSpec: 12.x
-
   - task: PublishCucumberReport@1
     displayName: 'Publish Cucumber Report'
     inputs:
@@ -45,8 +45,8 @@ steps:
       title: UI Testing
 
   - task: PublishBuildArtifacts@1
-    displayName: Export Cucumber report
+    displayName: Publish Cucumber Report Extension Artifact
     inputs:
       PathtoPublish: '/home/vsts/work/1/s/target/cucumberReport/cucumber-report-html/cucumber-html-reports/'
-      ArtifactName: 'Cucumber-Report'
+      ArtifactName: 'Cucumber-Report-Extension'
       publishLocation: 'Container'

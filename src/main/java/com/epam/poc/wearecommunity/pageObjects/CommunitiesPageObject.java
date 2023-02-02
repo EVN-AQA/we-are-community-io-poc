@@ -20,18 +20,17 @@ public class CommunitiesPageObject extends BasePage {
     }
 
     public void searchByKeyword(String keyword) {
-        sendKeyToElement(driver, CommunitiesPageUI.SEARCH_BY, keyword);
+        sendKeyToElement(driver, CommunitiesPageUI.INPUT_SEARCH_BY, keyword);
+        staticWait(2);
     }
 
-    public boolean isCommunityDisplayed(String communityTitle) {
-        // TODO: need to remove staticWait and add waitForElementVisible function instead
-        waitForElementUntilInvisible(driver, CommunitiesPageUI.EVENT_GLOBAL_LOADER);
-
+    public boolean isExpectedCommunitiesDisplayed(String keySearch) {
         boolean isCommunityDisplayed = true;
-        List<WebElement> communities = getElements(driver, CommunitiesPageUI.SEARCH_RESULT_BY);
+
+        List<WebElement> communities = getElements(driver, CommunitiesPageUI.TEXT_SEARCH_RESULT_BY);
         if (communities.size() > 0) {
             for (WebElement element : communities) {
-                if (!element.findElement(CommunitiesPageUI.TEXT_SEARCH_RESULT_BY).getText().contains(communityTitle)) {
+                if (!element.getText().toLowerCase().contains(keySearch.toLowerCase())) {
                     isCommunityDisplayed = false;
                     break;
                 }
@@ -41,11 +40,12 @@ public class CommunitiesPageObject extends BasePage {
     }
 
     public void openPageByCommunityTitle(String communityTitle) {
-        List<WebElement> communities = getElements(driver, CommunitiesPageUI.SEARCH_RESULT_BY);
+        List<WebElement> communities = getElements(driver, CommunitiesPageUI.TEXT_SEARCH_RESULT_BY);
         if (communities.size() > 0) {
             for (WebElement element : communities) {
-                if (element.findElement(CommunitiesPageUI.TEXT_SEARCH_RESULT_BY).getText().equalsIgnoreCase(communityTitle)) {
+                if (element.getText().equalsIgnoreCase(communityTitle)) {
                     element.click();
+                    break;
                 }
             }
         }

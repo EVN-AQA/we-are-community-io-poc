@@ -28,9 +28,9 @@ public class CommunitiesPageSteps {
         communitiesPageObject.searchByKeyword(keySearch);
     }
 
-    @Then("The community with the title {string} will be displayed as a search result")
-    public void theCommunityWithTheTitleWillBeDisplayedAsASearchResult(String communityTitle) {
-        Assertions.assertTrue(communitiesPageObject.isCommunityDisplayed(communityTitle));
+    @Then("The list search result communities will contains keyword {string}")
+    public void theCommunityWithTheTitleWillBeDisplayedAsASearchResult(String keySearch) {
+        Assertions.assertTrue(communitiesPageObject.isExpectedCommunitiesDisplayed(keySearch));
     }
 
     @When("I click to the community with the title {string}")

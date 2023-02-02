@@ -15,7 +15,7 @@ Feature: Open Communities Page
     Given I open the home page of wearecommunity website
     When I click to "See all communities" link
     And I type keyword "<Keyword>" on search box
-    Then The community with the title "<Page title>" will be displayed as a search result
+    Then The list search result communities will contains keyword "<Keyword>"
     When I click to the community with the title "<Page title>"
     Then The detail community page will be opened successfully with title: "<Page title>" and the URL: "<Page url>"
     Examples: Community page information

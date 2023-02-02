@@ -5,7 +5,7 @@ import com.epam.poc.wearecommunity.pageObjects.CommunityDetailPageObject;
 import com.epam.poc.wearecommunity.utilities.hook.Hook;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.Assertions;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 public class CommunitiesPageSteps {
@@ -20,7 +20,7 @@ public class CommunitiesPageSteps {
 
     @Then("The Communities page will be opened successfully with title: {string} and the URL: {string}")
     public void theCommunitiesPageWillBeOpenedSuccessfullyWithTitleAndTheURL(String titleName, String urlName) {
-        Assertions.assertTrue(communitiesPageObject.isPageOpenSuccessfully(titleName, urlName));
+        Assert.assertTrue(communitiesPageObject.isPageOpenSuccessfully(titleName, urlName));
     }
 
     @When("I type keyword {string} on search box")
@@ -30,7 +30,7 @@ public class CommunitiesPageSteps {
 
     @Then("The list search result communities will contains keyword {string}")
     public void theCommunityWithTheTitleWillBeDisplayedAsASearchResult(String keySearch) {
-        Assertions.assertTrue(communitiesPageObject.isExpectedCommunitiesDisplayed(keySearch));
+        Assert.assertTrue(communitiesPageObject.isExpectedCommunitiesDisplayed(keySearch));
     }
 
     @When("I click to the community with the title {string}")
@@ -41,6 +41,6 @@ public class CommunitiesPageSteps {
     @Then("The detail community page will be opened successfully with title: {string} and the URL: {string}")
     public void theDetailCommunityPageWillBeOpenedSuccessfullyWithTitleAndTheURL(String titleName, String urlName) {
         CommunityDetailPageObject communityDetailPageObject = new CommunityDetailPageObject(driver);
-        Assertions.assertTrue(communityDetailPageObject.isPageOpenSuccessfully(titleName, urlName));
+        Assert.assertTrue(communityDetailPageObject.isPageOpenSuccessfully(titleName, urlName));
     }
 }

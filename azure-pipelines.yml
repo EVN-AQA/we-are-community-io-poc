@@ -46,7 +46,7 @@ steps:
   - task: PublishCucumberReport@1
     displayName: 'Publish Cucumber Report'
     inputs:
-      jsonDir: 'cucumberReport/json'
-      outputPath: 'cucumberReport/cucumber-report-html'
+      jsonDir: 'target/cucumberReport/json'
+      outputPath: 'target/cucumberReport/cucumber-report-html'
       name: 'Smoke_Test'
       title: UI Testing

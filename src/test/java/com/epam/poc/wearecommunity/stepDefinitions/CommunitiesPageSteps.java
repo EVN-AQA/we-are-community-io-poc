@@ -2,7 +2,7 @@ package com.epam.poc.wearecommunity.stepDefinitions;
 
 import com.epam.poc.wearecommunity.pageObjects.CommunitiesPageObject;
 import com.epam.poc.wearecommunity.pageObjects.CommunityDetailPageObject;
-import com.epam.poc.wearecommunity.utilities.hook.Hook;
+import com.epam.poc.wearecommunity.core.hook.Hook;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;

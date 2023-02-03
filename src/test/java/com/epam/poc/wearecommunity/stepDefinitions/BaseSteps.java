@@ -2,7 +2,7 @@ package com.epam.poc.wearecommunity.stepDefinitions;
 
 import com.epam.poc.wearecommunity.pageObjects.BasePageObject;
 import com.epam.poc.wearecommunity.pageUIs.BasePageUI;
-import com.epam.poc.wearecommunity.utilities.hook.Hook;
+import com.epam.poc.wearecommunity.core.hook.Hook;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;

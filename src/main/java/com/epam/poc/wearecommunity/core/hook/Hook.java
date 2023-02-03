@@ -1,4 +1,4 @@
-package com.epam.poc.wearecommunity.utilities.hook;
+package com.epam.poc.wearecommunity.core.hook;
 
 import com.epam.poc.wearecommunity.configs.drivers.DriverConfig;
 import com.epam.poc.wearecommunity.core.GlobalConstants;

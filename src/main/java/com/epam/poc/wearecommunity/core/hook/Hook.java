@@ -22,10 +22,12 @@ public class Hook {
 
     @Before
     public void setUp() {
-        String pageUrl = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.PAGE_URL);
-        String browserName = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.BROWSER_NAME).toUpperCase();
+        String browserProperty = System.getProperty("Browser");
+        String browserName = (browserProperty != null) ? browserProperty : new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.BROWSER_NAME).toUpperCase();
 
-        logger.info("Page Url: " + pageUrl + "with browser name: " + browserName);
+        String pageUrl = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.PAGE_URL);
+
+        logger.info("Running on page URL: " + pageUrl + " with browser name: " + browserName);
         driver = DriverConfig.getDriver(browserName);
         driver.get(pageUrl);
     }

@@ -6,6 +6,9 @@
     </Properties>
 
     <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
         <RollingFile  name="RollingFileAppender"
                       fileName="${LOG_DIRECTORY}/application.log"
                       filePattern="${LOG_DIRECTORY}/application-%d{yyyy-MM-dd}.log.gz"
@@ -20,6 +23,7 @@
     </Appenders>
     <Loggers>
         <Root level="debug">
+            <AppenderRef ref="ConsoleAppender" />
             <AppenderRef ref="RollingFileAppender"/>
         </Root>
     </Loggers>

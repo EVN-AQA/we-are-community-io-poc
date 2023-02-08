@@ -20,6 +20,6 @@ Feature: Open Communities Page
     Then The detail community page will be opened successfully with title: "<Page title>" and the URL: "<Page url>"
     Examples: Community page information
       | Keyword            | Page title                   | Page url                                             |
-      | Automation testing | Automation Testing Community | https://wearecommunity.io/communities/testautomation1 |
-      | Language Lea       | Language Learning Junkies    | https://wearecommunity.io/communities/junkies   2     |
-      | Golang             | Golang United                | https://wearecommunity.io/communities/golang     3    |
+      | Automation testing | Automation Testing Community | https://wearecommunity.io/communities/testautomation |
+      | Language Lea       | Language Learning Junkies    | https://wearecommunity.io/communities/junkies        |
+      | Golang             | Golang United                | https://wearecommunity.io/communities/golang         |

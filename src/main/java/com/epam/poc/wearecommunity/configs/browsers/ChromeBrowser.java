@@ -16,9 +16,8 @@ public class ChromeBrowser {
         if (Boolean.parseBoolean(System.getProperty("isHeadless", "false"))) {
             options.addArguments("--headless");
             options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--no-sandbox");
         }
-        options.addArguments("--lang=vi");
+        options.addArguments("--no-sandbox");
         options.addArguments("window-size=1920x1080");
 
         return new ChromeDriver(options);

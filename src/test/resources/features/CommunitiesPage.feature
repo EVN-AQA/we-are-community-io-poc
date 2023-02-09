@@ -1,4 +1,4 @@
-@Smoke
+@Regression
 Feature: Open Communities Page
   As a user
   I want to see all communities

@@ -28,6 +28,7 @@ public class Hook {
         String pageUrl = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.PAGE_URL);
 
         logger.info("Running on page URL: " + pageUrl + " with browser name: " + browserName);
+        scenario.attach("Title scenario", "text/plain", browserName + "-" + scenario.getName());
         scenario.log("Running on page URL: " + pageUrl + " with browser name: " + browserName);
         driver = DriverConfig.getDriver(browserName);
         driver.get(pageUrl);

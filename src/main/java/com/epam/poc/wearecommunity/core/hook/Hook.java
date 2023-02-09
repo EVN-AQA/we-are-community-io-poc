@@ -21,13 +21,15 @@ public class Hook {
     }
 
     @Before
-    public void setUp() {
+    public void setUp(Scenario scenario) {
         String browserProperty = System.getProperty("Browser");
         String browserName = (browserProperty != null) ? browserProperty : new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.BROWSER_NAME).toUpperCase();
 
         String pageUrl = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY).getValue(GlobalConstants.PAGE_URL);
 
         logger.info("Running on page URL: " + pageUrl + " with browser name: " + browserName);
+        scenario.attach("Identify the browser name that is run with test scenario.", "text/plain",
+                "Running on browser name: " + browserName.toUpperCase());
         driver = DriverConfig.getDriver(browserName);
         driver.get(pageUrl);
     }

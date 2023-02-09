@@ -41,7 +41,7 @@ steps:
     inputs:
       jsonDir: 'target/cucumberReport/json'
       outputPath: 'target/cucumberReport/cucumber-report-html'
-      name: 'Smoke_Test'
+      name: '$(browserName) - Regression Test'
       title: UI Testing
 
   - task: PublishBuildArtifacts@1

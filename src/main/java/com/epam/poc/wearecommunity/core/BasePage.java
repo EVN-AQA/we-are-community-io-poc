@@ -112,7 +112,7 @@ public class BasePage {
         try {
             return getElement(driver, by).isDisplayed();
         } catch (NoSuchElementException e) {
-            logger.info("Element is not displayed.");
+            logger.error("Element is not displayed.");
             return false;
         }
     }
@@ -122,7 +122,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
         } catch (Exception e) {
-            logger.info("Page is not completed loaded.");
+            logger.error("Page is not completed loaded.");
         }
     }
 
@@ -130,7 +130,7 @@ public class BasePage {
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
-            logger.info("Error in staticWait" + e);
+            logger.error("Error in staticWait" + e);
         }
     }
 
@@ -139,7 +139,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.elementToBeClickable(element));
         } catch (Exception e) {
-            logger.info("Element not clickable");
+            logger.error("Element not clickable");
         }
     }
 
@@ -148,7 +148,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.elementToBeClickable(by));
         } catch (Exception e) {
-            logger.info("Element not clickable");
+            logger.error("Element not clickable");
         }
     }
 
@@ -157,7 +157,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
         } catch (Exception e) {
-            logger.info("Element is visibility");
+            logger.error("Element is visibility");
         }
     }
 
@@ -166,7 +166,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (Exception e) {
-            logger.info("Element is invisibility");
+            logger.error("Element is invisibility");
         }
     }
 
@@ -185,7 +185,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.titleIs(pageTitleValue));
         } catch (Exception e) {
-            logger.info("Page title is not the same as expected text");
+            logger.error("Page title is not the same as expected text");
         }
     }
 
@@ -194,7 +194,7 @@ public class BasePage {
             WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.textToBePresentInElement(element, text));
         } catch (Exception e) {
-            logger.info("Element doesn't contain expected text");
+            logger.error("Element doesn't contain expected text");
         }
     }
 
@@ -202,7 +202,7 @@ public class BasePage {
         try {
             return new URL(url).getPath();
         } catch (MalformedURLException e) {
-            logger.info("A malformed URL has occurred.");
+            logger.error("A malformed URL has occurred.");
             return null;
         }
     }

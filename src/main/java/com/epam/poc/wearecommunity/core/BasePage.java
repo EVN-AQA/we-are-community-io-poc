@@ -57,6 +57,10 @@ public class BasePage {
         return driver.findElement(by).getAttribute(attribute);
     }
 
+    public String getElementCssValue(WebDriver driver, By by, String value) {
+        return driver.findElement(by).getCssValue(value);
+    }
+
     public void clearByKeys(WebDriver driver, By by) {
         getElement(driver, by).sendKeys(Keys.CONTROL + "A" + Keys.DELETE);
     }
@@ -97,6 +101,11 @@ public class BasePage {
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
+    public void scrollToMiddle(WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
+    }
+
     public void scrollDownByOffset(WebDriver driver, int offset) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0," + offset + ")");
@@ -109,12 +118,7 @@ public class BasePage {
     }
 
     public boolean isElementDisplayed(WebDriver driver, By by) {
-        try {
-            return getElement(driver, by).isDisplayed();
-        } catch (NoSuchElementException e) {
-            logger.error("Element is not displayed.");
-            return false;
-        }
+        return getElement(driver, by).isDisplayed();
     }
 
     public void waitForPageLoadedCompletely(WebDriver driver) {

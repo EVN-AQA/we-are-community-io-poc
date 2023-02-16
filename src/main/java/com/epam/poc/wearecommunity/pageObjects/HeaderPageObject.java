@@ -6,6 +6,7 @@ import com.epam.poc.wearecommunity.pageUIs.HeaderPageUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.Color;
+import java.util.Objects;
 
 public class HeaderPageObject extends BasePage {
 
@@ -14,6 +15,14 @@ public class HeaderPageObject extends BasePage {
     public HeaderPageObject(WebDriver driver) {
         this.driver = driver;
     }
+
+
+    public void clickHomeButton() {
+        clickToElement(driver, HeaderPageUI.HOME_BUTTON_BY);
+    }
+
+    public boolean isHomeButtonDisplayed() {
+        return isElementDisplayed(driver, HeaderPageUI.HOME_BUTTON_BY);
 
     public String getElementPositionCssValue(String linkName) {
         waitForElementUntilVisible(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)));

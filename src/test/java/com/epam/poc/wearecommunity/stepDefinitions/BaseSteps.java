@@ -25,8 +25,13 @@ public class BaseSteps {
     public void iOpenTheHomePageOfWearecommunityWebsite() {
     }
 
-    @When("I click to {string} link")
-    public void iClickToLink(String linkName) {
-        basePageObject.clickToElement(driver, By.xpath(BasePageUI.linkXpath(linkName)));
+    @When("I click on {string} link")
+    public void iClickOnLink(String linkName) {
+        basePageObject.clickToElement(driver, By.xpath(String.format(BasePageUI.LINK_XPATH, linkName)));
+    }
+
+    @When("I hover on {string} link")
+    public void iHoverOnLink(String linkName) {
+        basePageObject.hoverElement(driver, By.xpath(String.format(BasePageUI.LINK_XPATH, linkName)));
     }
 }

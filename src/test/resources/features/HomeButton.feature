@@ -9,13 +9,13 @@ Feature: Open Communities Page
 
   @Smoke
   Scenario: Verify Home button is clickable and that it redirects the user to the main homepage
-    When I click to "See all communities" link
+    When I click on "See all communities" link
     And I click Home button
     Then Verify clicked on Home button redirects the user to the main homepage
 
   @Smoke
   Scenario Outline: Verify Home button is visible and accessible on all pages
-    When I click to "<Link Name>" link
+    When I click on "<Link Name>" link
     Then Verify Home button is visible on all pages
     Examples:
     | Link Name     |

@@ -25,7 +25,7 @@ public class BaseSteps {
     public void iOpenTheHomePageOfWearecommunityWebsite() {
     }
 
-    @When("I click to {string} link")
+    @When("I click on {string} link")
     public void iClickToLink(String linkName) {
         basePageObject.clickToElement(driver, By.xpath(BasePageUI.linkXpath(linkName)));
     }

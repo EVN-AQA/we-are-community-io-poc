@@ -3,6 +3,7 @@ package com.epam.poc.wearecommunity.stepDefinitions;
 import com.epam.poc.wearecommunity.core.hook.Hook;
 import com.epam.poc.wearecommunity.pageObjects.HeaderPageObject;
 import com.epam.poc.wearecommunity.pageUIs.BasePageUI;
+import com.epam.poc.wearecommunity.pageUIs.HeaderPageUI;
 import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,6 +57,8 @@ public class MainNavigationSteps {
         logger.debug("Verifying link will be highlighted: " + linkName);
         headerPageObject.waitForPageLoadedCompletely(driver);
         headerPageObject.waitForElementUntilVisible(driver, BasePageUI.EVENT_GLOBAL_CALENDAR_LOADER);
+        logger.debug("Verifying Events Calendar h1 will be displayed");
+        assertThat(headerPageObject.isElementDisplayed(driver, HeaderPageUI.EVENTS_CALENDAR_XPATH_BY)).as("Events Calendar h1 will be displayed").isTrue();
         assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
     }
 

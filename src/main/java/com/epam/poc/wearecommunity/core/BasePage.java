@@ -220,4 +220,8 @@ public class BasePage {
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
     }
+
+    public void refreshPage(WebDriver driver) {
+        driver.navigate().refresh();
+    }
 }

@@ -37,8 +37,8 @@ Feature: EPMRDVN-7131 - Test the Main Navigation
   Scenario Outline: EPMRDVN-7334 - Verify the Main Navigation will be highlighted and the new page will be opened with the expected URL when user click on it
     When I hover on "<Link Name To Hover>" link
     And I click on "<Link Name To Click>" link
-    Then "<Link Name To Highlight>" link will be highlighted
     And The new page will be opened successfully with the URL: "<Page Url>"
+    Then "<Link Name To Highlight>" link will be highlighted
     Examples:
       | Link Name To Hover | Link Name To Click | Link Name To Highlight | Page Url                                                                  |
       | Communities        | Communities        | Communities            | https://wearecommunity.io/communities                                     |

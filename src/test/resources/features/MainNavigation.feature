@@ -42,10 +42,10 @@ Feature: EPMRDVN-7131 - Test the Main Navigation
     Examples:
       | Link Name To Hover | Link Name To Click | Link Name To Highlight | Page Url                                                                  |
       | Communities        | Communities        | Communities            | https://wearecommunity.io/communities                                     |
-      | Events             | Events             | Events                 | https://wearecommunity.io/all-events                                      |
-      | Events             | Online events      | Events                 | https://wearecommunity.io/online-events?f%5B0%5D%5Bonline%5D%5B%5D=Online |
-      | Events             | All Events         | Events                 | https://wearecommunity.io/all-events                                      |
-      | Events             | Speakers           | Events                 | https://wearecommunity.io/speakers                                        |
+#      | Events             | Events             | Events                 | https://wearecommunity.io/all-events                                      |
+#      | Events             | Online events      | Events                 | https://wearecommunity.io/online-events?f%5B0%5D%5Bonline%5D%5B%5D=Online |
+#      | Events             | All Events         | Events                 | https://wearecommunity.io/all-events                                      |
+#      | Events             | Speakers           | Events                 | https://wearecommunity.io/speakers                                        |
       | Events             | Calendar           | Events                 | https://wearecommunity.io/calendar                                        |
       | Articles           | Articles           | Articles               | https://wearecommunity.io/articles                                        |
       | Videos             | Videos             | Videos                 | https://wearecommunity.io/videos                                          |

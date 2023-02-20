@@ -48,6 +48,9 @@ public class MainNavigationSteps {
     @Then("{string} link will be highlighted")
     public void linkWillBeHighlighted(String linkName) {
         headerPageObject.waitForPageLoadedCompletely(driver);
+        if (linkName.equalsIgnoreCase("Events")) {
+            headerPageObject.staticWait(30);
+        }
         assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
     }
 

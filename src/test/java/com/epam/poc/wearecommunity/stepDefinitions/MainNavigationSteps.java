@@ -2,7 +2,10 @@ package com.epam.poc.wearecommunity.stepDefinitions;
 
 import com.epam.poc.wearecommunity.core.hook.Hook;
 import com.epam.poc.wearecommunity.pageObjects.HeaderPageObject;
+import com.epam.poc.wearecommunity.pageUIs.BasePageUI;
 import io.cucumber.java.en.Then;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
 
@@ -17,9 +20,12 @@ public class MainNavigationSteps {
     private final WebDriver driver;
     private final HeaderPageObject headerPageObject;
 
+    protected Logger logger;
+
     public MainNavigationSteps() {
         driver = Hook.driver;
         headerPageObject = new HeaderPageObject(driver);
+        logger = LogManager.getLogger(getClass());
     }
 
     @Then("The main navigation bar is located at the top of the website")
@@ -47,7 +53,9 @@ public class MainNavigationSteps {
 
     @Then("{string} link will be highlighted")
     public void linkWillBeHighlighted(String linkName) {
+        logger.debug("Verifying link will be highlighted: " + linkName);
         headerPageObject.waitForPageLoadedCompletely(driver);
+        headerPageObject.waitForElementUntilVisible(driver, BasePageUI.EVENT_GLOBAL_CALENDAR_LOADER);
         assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
     }
 

@@ -58,6 +58,9 @@ public class MainNavigationSteps {
         headerPageObject.waitForPageLoadedCompletely(driver);
         headerPageObject.waitForElementUntilVisible(driver, BasePageUI.EVENT_GLOBAL_CALENDAR_LOADER);
         logger.debug("Verifying Events Calendar h1 will be displayed");
+
+        headerPageObject.staticWait(30);
+
         assertThat(headerPageObject.isElementDisplayed(driver, HeaderPageUI.EVENTS_CALENDAR_XPATH_BY)).as("Events Calendar h1 will be displayed").isTrue();
         assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
     }

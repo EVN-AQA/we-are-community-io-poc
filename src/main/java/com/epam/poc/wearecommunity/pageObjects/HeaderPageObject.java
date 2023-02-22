@@ -1,6 +1,7 @@
 package com.epam.poc.wearecommunity.pageObjects;
 
 import com.epam.poc.wearecommunity.core.BasePage;
+import com.epam.poc.wearecommunity.core.GlobalConstants;
 import com.epam.poc.wearecommunity.pageUIs.BasePageUI;
 import com.epam.poc.wearecommunity.pageUIs.HeaderPageUI;
 import org.openqa.selenium.By;
@@ -25,7 +26,7 @@ public class HeaderPageObject extends BasePage {
     }
 
     public String getElementPositionCssValue(String linkName) {
-        waitForElementUntilVisible(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)));
+        waitForElementUntilVisible(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)), GlobalConstants.SHORT_TIMEOUT_KEY);
         return getElementCssValue(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)), "position");
     }
 

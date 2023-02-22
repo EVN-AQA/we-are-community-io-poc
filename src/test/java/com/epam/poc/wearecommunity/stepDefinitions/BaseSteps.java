@@ -28,6 +28,7 @@ public class BaseSteps {
     @When("I click on {string} link")
     public void iClickOnLink(String linkName) {
         basePageObject.clickToElement(driver, By.xpath(String.format(BasePageUI.LINK_XPATH, linkName)));
+        basePageObject.waitForGlobalLoaderInvisible();
     }
 
     @When("I hover on {string} link")

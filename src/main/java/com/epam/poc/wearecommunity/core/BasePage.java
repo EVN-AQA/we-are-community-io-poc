@@ -181,12 +181,12 @@ public class BasePage {
         }
     }
 
-    public void waitForElementContainsText(WebDriver driver, WebElement element, String text, long timeOutInSeconds) {
+    public void waitForTextToBePresentInElement(WebDriver driver, By by, String text, long timeOutInSeconds) {
         wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            wait.until(ExpectedConditions.textToBePresentInElement(element, text));
+            wait.until(ExpectedConditions.textToBePresentInElementLocated(by, text));
         } catch (Exception e) {
-            logger.debug("Element doesn't contain expected text");
+            logger.debug("Element with expected text not to be presented");
         }
     }
 
@@ -207,5 +207,10 @@ public class BasePage {
     public void switchToFirstTab(WebDriver driver) {
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(0));
+    }
+
+    public void openAndSwitchToNewTab(WebDriver driver) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        switchToLastTab(driver);
     }
 }

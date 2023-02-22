@@ -26,7 +26,7 @@ public class HeaderPageObject extends BasePage {
     }
 
     public String getElementPositionCssValue(String linkName) {
-        waitForElementUntilVisible(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)), GlobalConstants.SHORT_TIMEOUT_KEY);
+        waitForElementUntilVisible(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)), Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
         return getElementCssValue(driver, By.xpath(String.format(HeaderPageUI.HEADER_BY_NAVIGATION_NAME_XPATH, linkName)), "position");
     }
 

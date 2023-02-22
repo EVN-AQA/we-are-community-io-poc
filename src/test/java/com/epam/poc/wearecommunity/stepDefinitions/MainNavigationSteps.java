@@ -1,6 +1,5 @@
 package com.epam.poc.wearecommunity.stepDefinitions;
 
-import com.epam.poc.wearecommunity.core.GlobalConstants;
 import com.epam.poc.wearecommunity.core.hook.Hook;
 import com.epam.poc.wearecommunity.pageObjects.HeaderPageObject;
 import io.cucumber.java.en.Then;
@@ -48,7 +47,6 @@ public class MainNavigationSteps {
 
     @Then("{string} link will be highlighted")
     public void linkWillBeHighlighted(String linkName) {
-        headerPageObject.waitForPageLoadedCompletely(driver, GlobalConstants.SHORT_TIMEOUT_KEY);
         assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
     }
 

@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     protected Logger logger;
-    private PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
+    protected PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
     private WebDriverWait wait;
 
     protected BasePage() {
@@ -83,8 +83,8 @@ public class BasePage {
         new Actions(driver).moveToElement(getElement(driver, by)).perform();
     }
 
-    public void waitAndClickToElement(WebDriver driver, By by) {
-        waitForElementUntilClickable(driver, by, GlobalConstants.LONG_TIMEOUT_KEY);
+    public void waitAndClickToElement(WebDriver driver, By by, long timeOutInSeconds) {
+        waitForElementUntilClickable(driver, by, timeOutInSeconds);
         clickToElement(driver, by);
     }
 
@@ -107,18 +107,12 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + offset + ")");
     }
 
-    public void scrollThenClickToElement(WebDriver driver, By by) {
-        scrollToElementByJS(driver, by);
-        waitForElementUntilClickable(driver, getElement(driver, by), GlobalConstants.LONG_TIMEOUT_KEY);
-        clickToElement(driver, by);
-    }
-
     public boolean isElementDisplayed(WebDriver driver, By by) {
         return getElement(driver, by).isDisplayed();
     }
 
-    public void waitForPageLoadedCompletely(WebDriver driver, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForPageLoadedCompletely(WebDriver driver, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
         } catch (Exception e) {
@@ -134,8 +128,8 @@ public class BasePage {
         }
     }
 
-    public void waitForElementUntilClickable(WebDriver driver, WebElement element, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForElementUntilClickable(WebDriver driver, WebElement element, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element));
         } catch (Exception e) {
@@ -143,8 +137,8 @@ public class BasePage {
         }
     }
 
-    public void waitForElementUntilClickable(WebDriver driver, By by, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForElementUntilClickable(WebDriver driver, By by, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.elementToBeClickable(by));
         } catch (Exception e) {
@@ -152,8 +146,8 @@ public class BasePage {
         }
     }
 
-    public void waitForElementUntilInvisible(WebDriver driver, By by, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForElementUntilInvisible(WebDriver driver, By by, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
         } catch (Exception e) {
@@ -161,8 +155,8 @@ public class BasePage {
         }
     }
 
-    public void waitForElementUntilVisible(WebDriver driver, By by, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForElementUntilVisible(WebDriver driver, By by, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (Exception e) {
@@ -178,8 +172,8 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", getElement(driver, by));
     }
 
-    public void waitForPageTitleAsExpectedText(WebDriver driver, String pageTitleValue, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForPageTitleAsExpectedText(WebDriver driver, String pageTitleValue, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.titleIs(pageTitleValue));
         } catch (Exception e) {
@@ -187,8 +181,8 @@ public class BasePage {
         }
     }
 
-    public void waitForElementContainsText(WebDriver driver, WebElement element, String text, String timeoutKey) {
-        wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(timeoutKey)));
+    public void waitForElementContainsText(WebDriver driver, WebElement element, String text, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.textToBePresentInElement(element, text));
         } catch (Exception e) {

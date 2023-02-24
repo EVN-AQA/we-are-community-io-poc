@@ -41,7 +41,7 @@ steps:
     inputs:
       jsonDir: 'target/cucumberReport/json'
       outputPath: 'target/cucumberReport/cucumber-report-html'
-      name: '$(browserName) - Regression Test'
+      name: '[$(browserName)] Regression Test for Sprint $(sprintNumber)'
       title: UI Testing
 
   - task: PublishBuildArtifacts@1

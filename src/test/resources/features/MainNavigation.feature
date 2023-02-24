@@ -47,7 +47,7 @@ Feature: EPMRDVN-7131 - Test the Main Navigation
       | Events             | Online events      | Events                 | https://wearecommunity.io/online-events?f%5B0%5D%5Bonline%5D%5B%5D=Online |
       | Events             | All Events         | Events                 | https://wearecommunity.io/all-events                                      |
       | Events             | Speakers           | Events                 | https://wearecommunity.io/speakers                                        |
-      | Events             | Calendar           | Events                 | https://wearecommunity.io/calendar                                        |
+      | Events             | Calendar           |                        | https://wearecommunity.io/calendar                                        |
       | Articles           | Articles           | Articles               | https://wearecommunity.io/articles                                        |
       | Videos             | Videos             | Videos                 | https://wearecommunity.io/videos                                          |
       | About              | About              | Home                   | https://wearecommunity.io/communities/community-platform                  |

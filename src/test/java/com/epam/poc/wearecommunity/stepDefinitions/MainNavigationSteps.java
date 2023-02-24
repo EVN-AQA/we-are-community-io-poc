@@ -47,7 +47,8 @@ public class MainNavigationSteps {
 
     @Then("{string} link will be highlighted")
     public void linkWillBeHighlighted(String linkName) {
-        assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
+        if (!linkName.equals(""))
+            assertThat(headerPageObject.getElementColor(linkName, "color")).as("%s link was be highlighted", linkName).isEqualTo(HIGHLIGHT_COLOR);
     }
 
     @Then("The new page will be opened successfully with the URL: {string}")

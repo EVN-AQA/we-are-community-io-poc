@@ -1,5 +1,6 @@
 @Regression
 @MainNavigation
+
 Feature: EPMRDVN-7131 - Test the Main Navigation
   As a guest,
   I would like to view and access to main pages through a navigation bar,

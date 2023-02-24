@@ -13,7 +13,8 @@ import org.junit.runner.RunWith;
                 "pretty",
                 "html:target/cucumberReport/cucumber-report-html/cucumber.html",
                 "json:target/cucumberReport/json/cucumber.json"},
-        snippets = CucumberOptions.SnippetType.CAMELCASE
+        snippets = CucumberOptions.SnippetType.CAMELCASE,
+        dryRun = false
 )
 public class WeAreCommunityTest {
 }

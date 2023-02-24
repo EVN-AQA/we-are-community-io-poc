@@ -1,6 +1,7 @@
 package com.epam.poc.wearecommunity.pageObjects;
 
 import com.epam.poc.wearecommunity.core.BasePage;
+import com.epam.poc.wearecommunity.core.GlobalConstants;
 import com.epam.poc.wearecommunity.pageUIs.LoginPageUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ public class LoginPageObject extends BasePage {
     }
 
     public void waitUntilSocialNameVisible(String name) {
-        waitForElementUntilVisible(driver, By.xpath(String.format(LoginPageUI.SOCIAL_NAME_XPATH, name)));
+        waitForElementUntilVisible(driver, By.xpath(String.format(LoginPageUI.SOCIAL_NAME_XPATH, name)),
+                Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
     }
 }

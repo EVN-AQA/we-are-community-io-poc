@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -21,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     protected Logger logger;
-    private PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
+    protected PropertyReader propertyReader = new PropertyReader(GlobalConstants.CONFIG_FILE_KEY);
+    private WebDriverWait wait;
 
     protected BasePage() {
         logger = LogManager.getLogger(getClass());
@@ -41,8 +41,7 @@ public class BasePage {
 
 
     public WebElement getElementByJavascriptExecutor(WebDriver driver, String executeScript) {
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        return (WebElement) jse.executeScript(executeScript);
+        return (WebElement) ((JavascriptExecutor) driver).executeScript(executeScript);
     }
 
     public List<WebElement> getElements(WebDriver driver, By by) {
@@ -84,8 +83,8 @@ public class BasePage {
         new Actions(driver).moveToElement(getElement(driver, by)).perform();
     }
 
-    public void waitAndClickToElement(WebDriver driver, By by) {
-        waitForElementUntilClickable(driver, by);
+    public void waitAndClickToElement(WebDriver driver, By by, long timeOutInSeconds) {
+        waitForElementUntilClickable(driver, by, timeOutInSeconds);
         clickToElement(driver, by);
     }
 
@@ -97,36 +96,27 @@ public class BasePage {
     }
 
     public void scrollToBottom(WebDriver driver) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
     public void scrollToMiddle(WebDriver driver) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight/2)");
     }
 
     public void scrollDownByOffset(WebDriver driver, int offset) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0," + offset + ")");
-    }
-
-    public void scrollThenClickToElement(WebDriver driver, By by) {
-        scrollToElementByJS(driver, by);
-        waitForElementUntilClickable(driver, getElement(driver, by));
-        clickToElement(driver, by);
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + offset + ")");
     }
 
     public boolean isElementDisplayed(WebDriver driver, By by) {
         return getElement(driver, by).isDisplayed();
     }
 
-    public void waitForPageLoadedCompletely(WebDriver driver) {
+    public void waitForPageLoadedCompletely(WebDriver driver, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
         } catch (Exception e) {
-            logger.error("Page is not completed loaded.");
+            logger.debug("Page is not completed loaded.");
         }
     }
 
@@ -134,71 +124,69 @@ public class BasePage {
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
-            logger.error("Error in staticWait" + e);
+            logger.debug("Error in staticWait" + e);
         }
     }
 
-    public void waitForElementUntilClickable(WebDriver driver, WebElement element) {
+    public void waitForElementUntilClickable(WebDriver driver, WebElement element, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.elementToBeClickable(element));
         } catch (Exception e) {
-            logger.error("Element not clickable");
+            logger.debug("Element not clickable");
         }
     }
 
-    public void waitForElementUntilClickable(WebDriver driver, By by) {
+    public void waitForElementUntilClickable(WebDriver driver, By by, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.elementToBeClickable(by));
         } catch (Exception e) {
-            logger.error("Element not clickable");
+            logger.debug("Element not clickable");
         }
     }
 
-    public void waitForElementUntilInvisible(WebDriver driver, By by) {
+    public void waitForElementUntilInvisible(WebDriver driver, By by, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
         } catch (Exception e) {
-            logger.error("Element is visibility");
+            logger.debug("Element is visibility");
         }
     }
 
-    public void waitForElementUntilVisible(WebDriver driver, By by) {
+    public void waitForElementUntilVisible(WebDriver driver, By by, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (Exception e) {
-            logger.error("Element is invisibility");
+            logger.debug("Element is invisibility");
         }
     }
 
     public void clickToElementByJS(WebDriver driver, WebElement element) {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public void clickToElementByJS(WebDriver driver, By by) {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", getElement(driver, by));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", getElement(driver, by));
     }
 
-    public void waitForPageTitleAsExpectedText(WebDriver driver, String pageTitleValue) {
+    public void waitForPageTitleAsExpectedText(WebDriver driver, String pageTitleValue, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.LONG_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.titleIs(pageTitleValue));
         } catch (Exception e) {
-            logger.error("Page title is not the same as expected text");
+            logger.debug("Page title is not the same as expected text");
         }
     }
 
-    public void waitForElementContainsText(WebDriver driver, WebElement element, String text) {
+    public void waitForElementContainsText(WebDriver driver, WebElement element, String text, long timeOutInSeconds) {
+        wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Long.parseLong(propertyReader.getValue(GlobalConstants.SHORT_TIMEOUT_KEY)));
             wait.until(ExpectedConditions.textToBePresentInElement(element, text));
         } catch (Exception e) {
-            logger.error("Element doesn't contain expected text");
+            logger.debug("Element doesn't contain expected text");
         }
     }
 
@@ -206,7 +194,7 @@ public class BasePage {
         try {
             return new URL(url).getPath();
         } catch (MalformedURLException e) {
-            logger.error("A malformed URL has occurred.");
+            logger.debug("A malformed URL has occurred.");
             return null;
         }
     }
